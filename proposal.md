@@ -1,41 +1,69 @@
-# Proposal name
+# assert with optional message
 
-The name of your proposal. Make it brief but unambiguous. We will be referring to it in hallway conversations, email, comment threads, and likely in our dreams, so make it snappy but try to spare the buzzwords and marketing.
+Adding an optional message to Dart's assert statement.
 
 ## Contact information
 
-Three key pieces of information are required:
+* Seth Ladd <sethladd@google.com>
+ 
+### Original repo location
 
-1. **Your name.** As the author, you are signing up to shepherd this proposal through the process. (A proposal *can* be passed on to someone else if really needed, but at any point in time, it must have a living breathing owner who actively cares about it.)
+* https://github.com/sethladd/dep_assert_with_optional_message
 
-2. **Your contact information.** Email address at a bare minimum. A GitHub account is good too.
+### Stakeholders
 
-3. **The repository where this proposal and its associated artifacts lives.** At first, this document will live *in* that repo, so it's kind of implicit. But, when the proposal is approved, the text will be migrated into the canonical repository for completed DEPs. At that point, we want it to point out to the original repo so readers can find the other artifacts, history, and discussion.
-
-In addition, a list of other stakeholders is good. These are people who have a vested interest and relevant expertise in the proposal. Good stakeholders are ones who:
-
-- Own important Dart applications or frameworks.
-- Are acutely feeling the pain this proposal addresses.
-- Can provide clear, articulate feedback.
-
-Names, email, and GitHub accounts if they have them.
+* Ian Hickson <ianh@google.com>
 
 ## Summary
 
-A brief description of the proposal. Think a couple of sentences or
-a short paragraph. Maybe a small snippet of code or example.
+An optional message for the assert statement, displayed when the assert fails.
+
+For example:
+
+`assert(thing != null, "You arrived here because the depleneration hasn't reordered. See http://goo.gl/fenf832f to learn more.");`
 
 ## Motivation
 
-This is in many ways the most important section. It motivates the reader to care about the problems or shortcomings this proposal addresses. The language specification and the language committee are both finite resources. Tell us why we should spend them on this issue instead of others.
+Assert statements are very useful for framework authors, and framework users.
+Asserts keep the other framework
+authors on the right path, and they keep consumers of the framework from getting into
+trouble. _Failing fast_ is a great developer experience.
 
-Describe in detail the existing problems or use cases this proposal addresses. A use case is more compelling when:
+Currently, Dart throws an exception when an assert fails in checked mode. The output of that exception
+includes a line and column number, which points the user to the location of the assert.
+This is necessary feedback to the user, but not sufficient to give the user a great experience.
 
-- It affects a large number of users.
-- These users are writing real-world programs.
-- It's difficult or impossible to workaround the problems.
+Here is an example exception output from Dart 1.12:
 
-In other words, the ideal motivation is a problem that's preventing every Dart user from shipping their app.
+```
+~/tmp $ dart --checked assert.dart 
+Unhandled exception:
+'file:///Users/sethladd/tmp/assert.dart': Failed assertion: line 3 pos 8: 'thing != null' is not true.
+#0      _AssertionError._throwNew (dart:core-patch/errors_patch.dart:27)
+#1      main (file:///Users/sethladd/tmp/assert.dart:3:8)
+#2      _startIsolate.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:261)
+#3      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:148)
+```
+
+Because failed asserts can trigger from the framework, and not a user's code,
+the user is left wondering "Why did this happen? What can I do about it? Did I mess
+up, or did my framework fail?".
+
+Unforunately, there isn't a standard or clear way for framework authors to include
+a helpful message with an assert. Ideally, the user would see something like this:
+
+```
+~/tmp $ dart --checked assert.dart 
+Unhandled exception:
+'file:///Users/sethladd/tmp/assert.dart': Failed assertion: line 3 pos 8: 'thing != null' is not true. Message: You arrived here because the depleneration hasn't reordered. See http://goo.gl/fenf832f to learn more.
+#0      _AssertionError._throwNew (dart:core-patch/errors_patch.dart:27)
+#1      main (file:///Users/sethladd/tmp/assert.dart:3:8)
+#2      _startIsolate.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:261)
+#3      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:148)
+```
+
+Now the user has context for the failed assertion, and ideally has a link to learn more, address the
+issue, and move on.
 
 ## Examples
 
