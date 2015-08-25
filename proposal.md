@@ -108,16 +108,12 @@ assertStatement:
 ;
 
 message:
-  rawStringLiteral
+  stringLiteral
 ;
 ```
 
 If the message is provided, the message _m_ is evaluated to an object o.
 It is a dynamic type error if _o_ is not of type String.
-The object _o_ is treated as a _raw string_, thus it is not interpolated.
-
-(Aside: would it be easier to say that the optional message is
-a const String?)
 
 If the assertion failed, an AssertionError is thrown. If
 _o_ is not null, the AssertionError is populated with the message.
@@ -173,8 +169,8 @@ The advantage of proper support for an optional assert message is that it is lik
 
 This proposal appears to be localized to the `assert()` statement.
 
-This proposal purposefully limits what the optional message can be (e.g. it is a raw literal string),
-which may be confusing to new users that expect expressions or strings with interpolations.
+Some users may expect the optional message to allow for an expression that
+returns a String.
 
 ## Deliverables
 
