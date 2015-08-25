@@ -5,10 +5,7 @@ Adding an optional message to Dart's assert statement.
 ## Contact information
 
 * Seth Ladd <sethladd@google.com>
- 
-### Original repo location
-
-* https://github.com/sethladd/dep_assert_with_optional_message
+* Original location: https://github.com/sethladd/dep_assert_with_optional_message
 
 ### Stakeholders
 
@@ -25,15 +22,14 @@ For example:
 ## Motivation
 
 Assert statements are very useful for framework authors, and framework users.
-Asserts keep the other framework
-authors on the right path, and they keep consumers of the framework from getting into
-trouble. _Failing fast_ is a great developer experience.
+Asserts keep the other framework authors on the right path, and they keep consumers of
+the framework from getting into trouble. _Failing fast_ is a great developer experience.
 
 Currently, Dart throws an exception when an assert fails in checked mode. The output of that exception
 includes a line and column number, which points the user to the location of the assert.
 This is necessary feedback to the user, but not sufficient to give the user a great experience.
 
-Here is an example exception output from Dart 1.12:
+For example, here is an exception output from Dart 1.12:
 
 ```
 ~/tmp $ dart --checked assert.dart 
@@ -45,7 +41,7 @@ Unhandled exception:
 #3      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:148)
 ```
 
-Because failed asserts can trigger from the framework, and not a user's code,
+Because failed asserts can often trigger from the framework, and not a user's code,
 the user is left wondering "Why did this happen? What can I do about it? Did I mess
 up, or did my framework fail?".
 
@@ -62,8 +58,8 @@ Unhandled exception:
 #3      _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:148)
 ```
 
-Now the user has context for the failed assertion, and ideally has a link to learn more, address the
-issue, and move on.
+Now the user has context for the failed assertion, and ideally has a link to learn more,
+the user has a better chance of addressing the issue.
 
 ## Examples
 
