@@ -169,9 +169,6 @@ The advantage of proper support for an optional assert message is that it is lik
 
 This proposal appears to be localized to the `assert()` statement.
 
-Some users may expect the optional message to allow for an expression that
-returns a String.
-
 ## Deliverables
 
 ### Language specification changes
