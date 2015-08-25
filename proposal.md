@@ -104,7 +104,7 @@ After:
 
 ```
 assertStatement:
-  assert ‘(’ conditionalExpression ', '? message? ‘)’ ‘;’
+  assert ‘(’ conditionalExpression ( ', ' message? ) ‘)’ ‘;’
 ;
 
 message:
@@ -112,16 +112,30 @@ message:
 ;
 ```
 
-If the message is provided, the message _m_ is evaluated to an object o.
-It is a dynamic type error if _o_ is not of type String.
+If a second argument (the _message expression_) is provided,
+if may be of any type.
 
-If the assertion failed, an AssertionError is thrown. If
-_o_ is not null, the AssertionError is populated with the message.
+If the assertion failed, and if there is
+a message, the message _m_ is
+evaluated to an object _o_.
+An AssertionError is created with the
+result of calling `toString()` on _o_.
+The AssertionError is then thrown.
 
-(Runtimes are encouraged to display the message with the output of
-the failed assertion.)
+If the assertion succeeds (evaluates to true),
+the message expression is _not_ evaluated.
 
-It is a static type warning if the type of _o_ may not be assigned to String.
+It is a dynamic type error if the result of
+`o.toString()` is not of type String.
+
+If an exception is thrown while evaluating _m_ to _o_, or while
+evaluating `o.toString()`, that exception is thrown as normal.
+
+(Commentary: If message evaluation throws an exception,
+the user will not see the assertion failure exception.)
+
+Runtimes are encouraged to display the message with the output of
+the failed assertion.
 
 ### Library change
 
@@ -146,6 +160,19 @@ class AssertionError {
   AssertionError([String message]) { /* ... */ }
 }
 ```
+
+### Non-normative example
+
+An assert like:
+
+    assert(<condition>, <message>);
+    
+Can be thought of like:
+
+    if (!<condition>) {
+      String messageString = (<message>).toString();
+      throw new AssertionError(messageString);
+    }
 
 ## Alternatives
 
