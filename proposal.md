@@ -51,7 +51,8 @@ a helpful message with an assert. Ideally, the user would see something like thi
 ```
 ~/tmp $ dart --checked assert.dart 
 Unhandled exception:
-'file:///Users/sethladd/tmp/assert.dart': Failed assertion: line 3 pos 8: 'thing != null' is not true. Message: You arrived here because the depleneration hasn't reordered. See http://goo.gl/fenf832f to learn more.
+'file:///Users/sethladd/tmp/assert.dart': Failed assertion: line 3 pos 8: 'thing != null' is not true.
+Message: You arrived here because the depleneration hasn't reordered. See http://goo.gl/fenf832f to learn more.
 #0      _AssertionError._throwNew (dart:core-patch/errors_patch.dart:27)
 #1      main (file:///Users/sethladd/tmp/assert.dart:3:8)
 #2      _startIsolate.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:261)
