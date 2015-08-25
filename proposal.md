@@ -102,6 +102,7 @@ After:
 
 ### Language change
 
+```
 assertStatement:
   assert ‘(’ conditionalExpression ','? message? ‘)’ ‘;’
 ;
@@ -109,6 +110,7 @@ assertStatement:
 message:
   rawStringLiteral
 ;
+```
 
 If the message is provided, the message _m_ is evaluated to an object o.
 It is a dynamic type error if _o_ is not of type String.
