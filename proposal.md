@@ -173,7 +173,7 @@ The advantage of proper support for an optional assert message is that it is lik
 
 This proposal appears to be localized to the `assert()` statement.
 
-This proposal purposefully limits what the optional message can be (e.g. it is a literal string),
+This proposal purposefully limits what the optional message can be (e.g. it is a raw literal string),
 which may be confusing to new users that expect expressions or strings with interpolations.
 
 ## Deliverables
