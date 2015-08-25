@@ -104,7 +104,7 @@ After:
 
 ```
 assertStatement:
-  assert ‘(’ conditionalExpression ','? message? ‘)’ ‘;’
+  assert ‘(’ conditionalExpression ', '? message? ‘)’ ‘;’
 ;
 
 message:
