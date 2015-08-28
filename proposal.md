@@ -166,7 +166,7 @@ An assert like:
 Can be thought of like:
 
     if (!<condition>) {
-      String messageString = (<message>).toString();
+      String messageString = (<message>);
       throw new AssertionError(messageString);
     }
 
