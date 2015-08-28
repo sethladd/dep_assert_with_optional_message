@@ -112,24 +112,20 @@ message:
 ;
 ```
 
-If a second argument (the _message expression_) is provided,
-if may be of any type.
-
 If the assertion failed, and if there is
 a message, the message _m_ is
 evaluated to an object _o_.
-An AssertionError is created with the
-result of calling `toString()` on _o_.
+
+It is a dynamic type error if _o_ is not of type String.
+
+An AssertionError is created with _o_.
 The AssertionError is then thrown.
 
 If the assertion succeeds (evaluates to true),
 the message expression is _not_ evaluated.
 
-It is a dynamic type error if the result of
-`o.toString()` is not of type String.
-
-If an exception is thrown while evaluating _m_ to _o_, or while
-evaluating `o.toString()`, that exception is thrown as normal.
+If an exception is thrown while evaluating _m_ to _o_,
+that exception is thrown as normal.
 
 (Commentary: If message evaluation throws an exception,
 the user will not see the assertion failure exception.)
