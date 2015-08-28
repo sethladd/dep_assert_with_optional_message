@@ -196,7 +196,7 @@ This proposal appears to be localized to the `assert()` statement.
 
 ### Language specification changes
 
-TBD
+See https://github.com/sethladd/dep_assert_with_optional_message/blob/master/dartLangSpec-assert_optional_message.pdf
 
 ### A working implementation
 
