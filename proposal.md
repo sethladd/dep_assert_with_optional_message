@@ -102,8 +102,6 @@ After:
 
 ### Language change - HISTORICAL, SEE SPEC INSTEAD
 
-~~~
-
 ```
 assertStatement:
   assert ‘(’ conditionalExpression ( ', ' message )? ‘)’ ‘;’
