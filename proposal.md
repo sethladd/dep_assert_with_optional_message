@@ -96,11 +96,13 @@ After:
 // ...
 ```
 
-## Proposal
+## Proposal - HISTORICAL, SEE SPEC INSTEAD
 
 (disclaimer: I am not a language designer. I expect this part to get changed by experts.)
 
-### Language change
+### Language change - HISTORICAL, SEE SPEC INSTEAD
+
+~~~
 
 ```
 assertStatement:
@@ -133,7 +135,7 @@ the user will not see the assertion failure exception.)
 Runtimes are encouraged to display the message with the output of
 the failed assertion.
 
-### Library change
+### Library change - STILL HISTORICAL, SEE SPEC INSTEAD
 
 The class `AssertionError` is modified to add an optional message to its constructor,
 and a new getter.
